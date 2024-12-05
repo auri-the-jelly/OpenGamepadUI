@@ -8,6 +8,7 @@ class_name HardwareManager
 
 const amd_vendor_ids := ["AMD", "AuthenticAMD", 'AuthenticAMD Advanced Micro Devices, Inc.', "Advanced Micro Devices, Inc. [AMD/ATI]"]
 const intel_vendor_ids := ["Intel", "GenuineIntel", "Intel Corporation"]
+const nvidia_vendor_ids := ["NVIDIA Corporation", "NVIDIA"]
 var pci_ids_path := Xdg.with_system_path("hwdata/pci.ids")
 var amd_apu_database := load("res://core/platform/hardware/amd_apu_database.tres") as APUDatabase
 var intel_apu_database := load("res://core/platform/hardware/intel_apu_database.tres") as APUDatabase
@@ -76,8 +77,8 @@ func get_gpu_info() -> GPUInfo:
 			gpu_info.vendor = "AMD"
 		"Intel", "GenuineIntel", "Intel Corporation":
 			gpu_info.vendor = "Intel"
-		"Nvidia":
-			gpu_info.vendor = "Trash" # :D
+		"Nvidia", "NVIDIA", "NVIDIA Corporation":
+			gpu_info.vendor = "NVIDIA" # :D
 			logger.info("Nvidia devices are not suppored.")
 			return null
 		_:
